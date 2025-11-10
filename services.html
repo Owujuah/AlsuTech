@@ -1,0 +1,2097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - ALSUTECH</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0052CC;
+            --accent-orange: #FF6B35;
+            --accent-teal: #00D4AA;
+            --neutral-dark: #2D3A4B;
+            --neutral-gray: #6B7A90;
+            --background-light: #F8FAFC;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--neutral-dark);
+            overflow-x: hidden;
+            background: var(--background-light);
+        }
+
+        /* Enhanced Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 0.75rem 5%;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            z-index: 1001;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--neutral-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a.active {
+            color: var(--primary-blue);
+        }
+
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .nav-menu a.commented {
+            color: var(--neutral-gray);
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-blue);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+            box-shadow: 0 4px 15px rgba(0, 82, 204, 0.3);
+            white-space: nowrap;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) translateZ(0);
+            box-shadow: 0 8px 25px rgba(0, 82, 204, 0.4);
+        }
+
+        /* Enhanced Services Hero with New Animation */
+        .services-hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #0066FF 100%);
+            color: var(--white);
+            padding: 150px 5% 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .services-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) scale(1);
+                background-position: 20% 80%, 80% 20%, 40% 40%;
+            }
+            33% { 
+                transform: translateY(-10px) rotate(1deg) scale(1.02);
+                background-position: 25% 75%, 75% 25%, 45% 45%;
+            }
+            66% { 
+                transform: translateY(5px) rotate(-1deg) scale(0.98);
+                background-position: 15% 85%, 85% 15%, 35% 35%;
+            }
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: elementFloat 15s ease-in-out infinite;
+        }
+
+        .element-1 {
+            width: 100px;
+            height: 100px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .element-2 {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-orange);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .element-3 {
+            width: 60px;
+            height: 60px;
+            background: var(--white);
+            border-radius: 20% 80% 80% 20% / 20% 20% 80% 80%;
+            bottom: 30%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes elementFloat {
+            0%, 100% { 
+                transform: translateY(0px) translateX(0px) rotate(0deg);
+            }
+            25% { 
+                transform: translateY(-20px) translateX(10px) rotate(90deg);
+            }
+            50% { 
+                transform: translateY(-40px) translateX(-10px) rotate(180deg);
+            }
+            75% { 
+                transform: translateY(-20px) translateX(-5px) rotate(270deg);
+            }
+        }
+
+        .services-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .services-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            transform: translateZ(0);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            line-height: 1.2;
+        }
+
+        .services-hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            transform: translateZ(0);
+            line-height: 1.6;
+        }
+
+        /* Enhanced Service Categories with New Animation */
+        .service-categories {
+            padding: 4rem 5%;
+            background: var(--white);
+        }
+
+        .categories-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background: var(--background-light);
+            border: 2px solid transparent;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .category-btn:hover::before {
+            left: 100%;
+        }
+
+        .category-btn.active {
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            color: var(--white);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 82, 204, 0.3);
+        }
+
+        .category-btn:hover:not(.active) {
+            border-color: var(--primary-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Enhanced Service Showcase with New Animations */
+        .service-showcase {
+            padding: 2rem 5%;
+            background: var(--background-light);
+        }
+
+        .service-detail {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .service-detail.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .service-header {
+            background: linear-gradient(135deg, var(--primary-blue), #0066FF);
+            color: var(--white);
+            padding: 4rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: backgroundScroll 20s linear infinite;
+        }
+
+        @keyframes backgroundScroll {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-50px, -50px) rotate(360deg); }
+        }
+
+        .service-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            animation: iconPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        .service-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-content {
+            padding: 4rem 3rem;
+        }
+
+        .service-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: var(--background-light);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            border-left: 5px solid var(--accent-teal);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 170, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-blue);
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2) rotate(10deg);
+            color: var(--accent-teal);
+        }
+
+        .feature-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--neutral-dark);
+        }
+
+        .feature-card p {
+            color: var(--neutral-gray);
+            line-height: 1.7;
+        }
+
+        .service-process {
+            background: linear-gradient(135deg, #f8fafc, #e8eff5);
+            padding: 4rem 3rem;
+            border-radius: 20px;
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-process::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, transparent, rgba(0, 82, 204, 0.05), transparent);
+            border-radius: 50%;
+            animation: processOrbit 10s linear infinite;
+        }
+
+        @keyframes processOrbit {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-100px, -100px) rotate(360deg); }
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .process-step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-number::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .process-step h4 {
+            margin-bottom: 1rem;
+            color: var(--neutral-dark);
+            font-size: 1.3rem;
+        }
+
+        .process-step p {
+            color: var(--neutral-gray);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .service-cta {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, var(--accent-teal), #00B894);
+            color: var(--white);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 30px 30px;
+            animation: backgroundScroll 15s linear infinite;
+        }
+
+        .service-cta h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .consultation-btn {
+            background: var(--white);
+            color: var(--accent-teal);
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateZ(0);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .consultation-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 170, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .consultation-btn:hover::before {
+            left: 100%;
+        }
+
+        .consultation-btn:hover {
+            transform: translateY(-5px) scale(1.05) translateZ(0);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Enhanced Technology Stack */
+        .tech-stack {
+            padding: 5rem 5%;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            color: var(--neutral-dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--neutral-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: var(--background-light);
+            border-radius: 20px;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-teal));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tech-item:hover::before {
+            opacity: 0.05;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-10px) rotateY(10deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .tech-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-blue);
+            display: block;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tech-item:hover .tech-icon {
+            transform: scale(1.2) rotate(10deg);
+            color: var(--accent-teal);
+        }
+
+        .tech-item h4 {
+            color: var(--neutral-dark);
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Enhanced Case Studies Preview */
+        .case-studies-preview {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, var(--background-light), #e8eff5);
+        }
+
+        .case-studies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .case-study-card {
+            background: var(--white);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .case-study-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(0, 82, 204, 0.03), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .case-study-card:hover::before {
+            opacity: 1;
+        }
+
+        .case-study-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+
+        .case-study-image {
+            height: 250px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-teal));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-study-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,0 100,50 50,100 0,50" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 50px 50px;
+            animation: backgroundScroll 20s linear infinite;
+        }
+
+        .case-study-content {
+            padding: 2.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .case-study-content h3 {
+            margin-bottom: 1rem;
+            color: var(--neutral-dark);
+            font-size: 1.5rem;
+        }
+
+        .case-study-content p {
+            color: var(--neutral-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .case-study-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+            flex: 1;
+            min-width: 80px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: block;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--neutral-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Enhanced FAQ Section */
+        .faq-section {
+            padding: 5rem 5%;
+            background: var(--white);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--background-light);
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .faq-question {
+            padding: 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--neutral-dark);
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .faq-question:hover {
+            background: #f1f5f9;
+        }
+
+        .faq-answer {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: var(--neutral-gray);
+            line-height: 1.7;
+        }
+
+        .faq-answer.active {
+            padding: 0 2rem 2rem;
+            max-height: 500px;
+        }
+
+        .faq-toggle {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        .faq-toggle.active {
+            transform: rotate(45deg);
+            color: var(--accent-teal);
+        }
+
+        /* Enhanced Final CTA */
+        .final-cta {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #0066FF 100%);
+            color: var(--white);
+            padding: 6rem 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: backgroundScroll 25s linear infinite;
+        }
+
+        .final-cta h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .final-cta p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Enhanced Footer */
+        .footer {
+            background: var(--neutral-dark);
+            color: var(--white);
+            padding: 3rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 1rem;
+            color: var(--white);
+            font-size: 1.2rem;
+        }
+
+        .footer-column a {
+            color: #CBD5E0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-teal);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #4A5568;
+            padding-top: 2rem;
+            text-align: center;
+            color: #CBD5E0;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: #4A5568;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .social-icon:hover {
+            background: var(--accent-teal);
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* Consultation Modal */
+        .consultation-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 1rem;
+        }
+
+        .consultation-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .consultation-form {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            transform: translateY(30px) scale(0.9);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .consultation-modal.active .consultation-form {
+            transform: translateY(0) scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--neutral-gray);
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--neutral-dark);
+            transform: rotate(90deg);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--neutral-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            background: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
+        }
+
+        /* Enhanced Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px) rotateY(20deg);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0) rotateY(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px) rotateY(-20deg);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0) rotateY(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.8) rotate(-5deg);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1) rotate(0);
+        }
+
+        .reveal-stagger > * {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-stagger.active > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 1023px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                z-index: 1000;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu a {
+                font-size: 1.3rem;
+                padding: 0.5rem 0;
+            }
+
+            .cta-button {
+                margin-top: 1rem;
+            }
+        }
+
+        /* Tablet Styles */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .services-hero h1 {
+                font-size: 3rem;
+            }
+
+            .service-header h2 {
+                font-size: 2.5rem;
+            }
+
+            .service-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .case-studies-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 767px) {
+            .services-hero {
+                padding: 120px 5% 60px;
+                min-height: 50vh;
+            }
+
+            .services-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .services-hero p {
+                font-size: 1.1rem;
+            }
+
+            .categories-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .category-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+                padding: 1rem 1.5rem;
+            }
+
+            .service-header {
+                padding: 3rem 1.5rem;
+            }
+
+            .service-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .service-header p {
+                font-size: 1.1rem;
+            }
+
+            .service-content {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .service-features {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .service-process {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .service-cta {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .service-cta h3 {
+                font-size: 1.8rem;
+            }
+
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .tech-item {
+                padding: 2rem 1rem;
+            }
+
+            .case-studies-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .case-study-content {
+                padding: 2rem;
+            }
+
+            .case-study-stats {
+                justify-content: center;
+            }
+
+            .stat {
+                min-width: 70px;
+            }
+
+            .faq-question {
+                padding: 1.5rem;
+                font-size: 1rem;
+            }
+
+            .faq-answer.active {
+                padding: 0 1.5rem 1.5rem;
+            }
+
+            .final-cta {
+                padding: 4rem 5%;
+            }
+
+            .final-cta h2 {
+                font-size: 2.2rem;
+            }
+
+            .final-cta p {
+                font-size: 1.1rem;
+            }
+
+            .consultation-form {
+                padding: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* Small Mobile Devices */
+        @media (max-width: 480px) {
+            .services-hero h1 {
+                font-size: 2rem;
+            }
+
+            .services-hero p {
+                font-size: 1rem;
+            }
+
+            .service-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .service-icon {
+                font-size: 4rem;
+            }
+
+            .feature-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .feature-icon {
+                font-size: 2.5rem;
+            }
+
+            .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.3rem;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .final-cta h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Large Desktop Screens */
+        @media (min-width: 1440px) {
+            .services-hero-content,
+            .service-detail,
+            .tech-grid,
+            .case-studies-grid,
+            .faq-container,
+            .footer-content {
+                max-width: 1400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Enhanced Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">ALSUTECH</div>
+            
+            <!-- Hamburger Menu -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <!-- <li><a href="#" class="commented">Case Studies</a></li>
+                <li><a href="#" class="commented">Blog</a></li> -->
+                <li><a href="contact.html">Contact</a></li>
+                <li><button class="cta-button" id="navConsultationBtn">GET QUOTE</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Enhanced Services Hero -->
+    <section class="services-hero">
+        <div class="floating-elements">
+            <div class="floating-element element-1"></div>
+            <div class="floating-element element-2"></div>
+            <div class="floating-element element-3"></div>
+        </div>
+        <div class="services-hero-content">
+            <h1 class="reveal">Our Services</h1>
+            <p class="reveal">Comprehensive technology solutions to transform your business and drive digital innovation</p>
+        </div>
+    </section>
+
+    <!-- Enhanced Service Categories -->
+    <section class="service-categories">
+        <div class="categories-nav">
+            <button class="category-btn active" data-service="software">
+                <i class="fas fa-code"></i> Software Development
+            </button>
+            <button class="category-btn" data-service="cloud">
+                <i class="fas fa-cloud"></i> Cloud Solutions
+            </button>
+            <button class="category-btn" data-service="security">
+                <i class="fas fa-shield-alt"></i> Cybersecurity
+            </button>
+            <button class="category-btn" data-service="data">
+                <i class="fas fa-chart-line"></i> Data & AI
+            </button>
+        </div>
+    </section>
+
+    <!-- Enhanced Service Showcase -->
+    <section class="service-showcase">
+        <!-- Software Development Service -->
+        <div class="service-detail active" id="software-service">
+            <div class="service-header">
+                <div class="service-icon">💻</div>
+                <h2 class="reveal">Custom Software Development</h2>
+                <p class="reveal">Tailored solutions that transform your business processes and drive growth</p>
+            </div>
+            
+            <div class="service-content">
+                <div class="service-features reveal-stagger">
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h4>Web Application Development</h4>
+                        <p>Scalable, responsive web applications built with modern frameworks and best practices</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h4>Mobile App Development</h4>
+                        <p>Native and cross-platform mobile applications for iOS and Android</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h4>Enterprise Solutions</h4>
+                        <p>Custom ERP, CRM, and business process automation systems</p>
+                    </div>
+                </div>
+
+                <div class="service-process">
+                    <h3 class="reveal">Our Development Process</h3>
+                    <div class="process-steps reveal-stagger">
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <h4>Discovery & Planning</h4>
+                            <p>Requirements analysis and project roadmap</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <h4>Design & Prototyping</h4>
+                            <p>UI/UX design and interactive prototypes</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <h4>Development</h4>
+                            <p>Agile development with continuous integration</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">4</div>
+                            <h4>Testing & Deployment</h4>
+                            <p>Quality assurance and production deployment</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-cta">
+                    <h3 class="reveal">Ready to Build Your Solution?</h3>
+                    <p class="reveal">Let's discuss your project requirements and create a custom development plan</p>
+                    <button class="consultation-btn" data-service="Software Development">
+                        <i class="fas fa-calendar-check"></i> Start Your Project
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cloud Solutions Service -->
+        <div class="service-detail" id="cloud-service">
+            <div class="service-header">
+                <div class="service-icon">☁️</div>
+                <h2 class="reveal">Cloud Infrastructure & Solutions</h2>
+                <p class="reveal">Scalable, secure, and reliable cloud infrastructure for modern businesses</p>
+            </div>
+            
+            <div class="service-content">
+                <div class="service-features reveal-stagger">
+                    <div class="feature-card">
+                        <div class="feature-icon">🏗️</div>
+                        <h4>Cloud Migration</h4>
+                        <p>Seamless migration of your infrastructure and applications to the cloud</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h4>Infrastructure as Code</h4>
+                        <p>Automated, reproducible cloud infrastructure deployment</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h4>Cloud Security</h4>
+                        <p>Comprehensive security and compliance for your cloud environment</p>
+                    </div>
+                </div>
+
+                <div class="service-cta">
+                    <h3 class="reveal">Optimize Your Cloud Strategy</h3>
+                    <p class="reveal">Get expert guidance on cloud adoption and optimization</p>
+                    <button class="consultation-btn" data-service="Cloud Solutions">
+                        <i class="fas fa-cloud-upload-alt"></i> Cloud Consultation
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cybersecurity Service -->
+        <div class="service-detail" id="security-service">
+            <div class="service-header">
+                <div class="service-icon">🔒</div>
+                <h2 class="reveal">Cybersecurity Services</h2>
+                <p class="reveal">Protect your business from evolving cyber threats with our comprehensive security solutions</p>
+            </div>
+            
+            <div class="service-content">
+                <div class="service-features reveal-stagger">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h4>Security Assessment</h4>
+                        <p>Comprehensive vulnerability assessment and penetration testing</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h4>Managed Security</h4>
+                        <p>24/7 monitoring and threat detection services</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📋</div>
+                        <h4>Compliance & Governance</h4>
+                        <p>Ensure compliance with industry regulations and standards</p>
+                    </div>
+                </div>
+
+                <div class="service-cta">
+                    <h3 class="reveal">Secure Your Digital Assets</h3>
+                    <p class="reveal">Protect your business with enterprise-grade security solutions</p>
+                    <button class="consultation-btn" data-service="Cybersecurity">
+                        <i class="fas fa-shield-alt"></i> Security Assessment
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data & AI Service -->
+        <div class="service-detail" id="data-service">
+            <div class="service-header">
+                <div class="service-icon">📊</div>
+                <h2 class="reveal">Data Analytics & AI Solutions</h2>
+                <p class="reveal">Transform your data into actionable insights and intelligent automation</p>
+            </div>
+            
+            <div class="service-content">
+                <div class="service-features reveal-stagger">
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h4>Business Intelligence</h4>
+                        <p>Interactive dashboards and reporting for data-driven decisions</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <h4>Machine Learning</h4>
+                        <p>Custom ML models for prediction, classification, and automation</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <h4>Data Engineering</h4>
+                        <p>Robust data pipelines and ETL processes</p>
+                    </div>
+                </div>
+
+                <div class="service-cta">
+                    <h3 class="reveal">Unlock Your Data Potential</h3>
+                    <p class="reveal">Leverage AI and analytics to drive business innovation</p>
+                    <button class="consultation-btn" data-service="Data & AI">
+                        <i class="fas fa-brain"></i> AI Consultation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Technology Stack -->
+    <section class="tech-stack">
+        <div class="section-header">
+            <h2 class="reveal">Our Technology Stack</h2>
+            <p class="reveal">We work with cutting-edge technologies to deliver exceptional solutions</p>
+        </div>
+        <div class="tech-grid reveal-stagger">
+            <div class="tech-item">
+                <div class="tech-icon">⚛️</div>
+                <h4>React & Node.js</h4>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">☁️</div>
+                <h4>AWS & Azure</h4>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">🐍</div>
+                <h4>Python & AI/ML</h4>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">🗄️</div>
+                <h4>SQL & NoSQL</h4>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">🔒</div>
+                <h4>Security Tools</h4>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">📊</div>
+                <h4>Data Analytics</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Case Studies Preview -->
+    <!-- <section class="case-studies-preview">
+        <div class="section-header">
+            <h2 class="reveal">Success Stories</h2>
+            <p class="reveal">See how we've helped businesses achieve their goals</p>
+        </div>
+        <div class="case-studies-grid reveal-stagger">
+            <div class="case-study-card">
+                <div class="case-study-image">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="case-study-content">
+                    <h3>E-commerce Platform</h3>
+                    <p>Built a scalable e-commerce platform processing 10,000+ daily transactions</p>
+                    <div class="case-study-stats">
+                        <div class="stat">
+                            <span class="stat-value">300%</span>
+                            <span class="stat-label">Revenue Growth</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">2s</span>
+                            <span class="stat-label">Load Time</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-study-card">
+                <div class="case-study-image">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="case-study-content">
+                    <h3>Healthcare Analytics</h3>
+                    <p>AI-powered analytics platform for patient care optimization</p>
+                    <div class="case-study-stats">
+                        <div class="stat">
+                            <span class="stat-value">40%</span>
+                            <span class="stat-label">Efficiency Gain</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">99.9%</span>
+                            <span class="stat-label">Uptime</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Enhanced FAQ Section -->
+    <section class="faq-section">
+        <div class="section-header">
+            <h2 class="reveal">Frequently Asked Questions</h2>
+            <p class="reveal">Get answers to common questions about our services</p>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    What is your typical project timeline?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Project timelines vary based on complexity. Simple websites: 2-4 weeks, Medium applications: 2-4 months, Enterprise solutions: 4-8 months. We provide detailed timelines during project discovery.
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    Do you provide ongoing support and maintenance?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Yes, we offer comprehensive support and maintenance packages including bug fixes, security updates, performance optimization, and feature enhancements.
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    What industries do you specialize in?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    We have extensive experience across multiple industries including healthcare, finance, e-commerce, education, manufacturing, and technology startups.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Final CTA -->
+    <section class="final-cta">
+        <h2 class="reveal">Ready to Start Your Project?</h2>
+        <p class="reveal">Let's discuss how our services can help your business grow</p>
+        <button class="consultation-btn reveal-scale" data-service="General Consultation">
+            <i class="fas fa-calendar-check"></i> Schedule Free Consultation
+        </button>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>ALSUTECH</h4>
+                <p>Simplifying complex technology to drive business growth and efficiency.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <a href="#">About Us</a>
+                <a href="#">Our Team</a>
+                <a href="#">Careers</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-column">
+                <h4>Services</h4>
+                <a href="#">Software Development</a>
+                <a href="#">Cloud Solutions</a>
+                <a href="#">Cybersecurity</a>
+                <a href="#">Data Analytics</a>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <a href="#">Documentation</a>
+                <a href="#">Support</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="social-links">
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+            </div>
+            <p>© 2025 ALSUTECH. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <p>📍 18 Summit Hills Estate, CICC, Calabr, CRS | 📞 (+234) 9075392231 | ✉️ alsutechsolutions@gmail.com
+        </div>
+    </footer>
+
+    <!-- Enhanced Consultation Modal -->
+    <div class="consultation-modal" id="consultationModal">
+        <div class="consultation-form">
+            <button class="close-modal" id="closeConsultationModal">&times;</button>
+            <h3>Schedule Consultation</h3>
+            <form id="consultationForm">
+                <div class="form-group">
+                    <label for="serviceInterest">Service Interested In</label>
+                    <input type="text" id="serviceInterest" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" id="company" placeholder="Enter your company name">
+                </div>
+                <div class="form-group">
+                    <label for="message">Project Details *</label>
+                    <textarea id="message" placeholder="Tell us about your project requirements..." required></textarea>
+                </div>
+                <button type="submit" class="cta-button" style="width: 100%;">
+                    Schedule Consultation
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Navigation Toggle
+        function setupMobileNavigation() {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+            
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+            });
+            
+            // Close menu when clicking on links
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        // Service Category Navigation with Enhanced Animations
+        function setupServiceNavigation() {
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const serviceDetails = document.querySelectorAll('.service-detail');
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    categoryBtns.forEach(b => {
+                        b.classList.remove('active');
+                        b.style.animation = 'none';
+                    });
+                    
+                    // Add active class to clicked button with animation
+                    btn.classList.add('active');
+                    btn.style.animation = 'pulse 0.5s ease';
+                    
+                    // Hide all service details
+                    serviceDetails.forEach(detail => {
+                        detail.classList.remove('active');
+                    });
+                    
+                    // Show corresponding service detail with delay for animation
+                    const serviceId = btn.dataset.service + '-service';
+                    setTimeout(() => {
+                        document.getElementById(serviceId).classList.add('active');
+                    }, 300);
+                });
+            });
+        }
+
+        // FAQ Toggle with Enhanced Animations
+        function setupFAQ() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const toggle = question.querySelector('.faq-toggle');
+                    
+                    // Close other open FAQs
+                    faqQuestions.forEach(otherQuestion => {
+                        if (otherQuestion !== question) {
+                            const otherAnswer = otherQuestion.nextElementSibling;
+                            const otherToggle = otherQuestion.querySelector('.faq-toggle');
+                            otherAnswer.classList.remove('active');
+                            otherToggle.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current FAQ
+                    answer.classList.toggle('active');
+                    toggle.classList.toggle('active');
+                });
+            });
+        }
+
+        // Consultation Modal with Enhanced Animations
+        function setupConsultationModal() {
+            const consultationModal = document.getElementById('consultationModal');
+            const closeConsultationModal = document.getElementById('closeConsultationModal');
+            const consultationForm = document.getElementById('consultationForm');
+            const serviceInterest = document.getElementById('serviceInterest');
+            const consultationBtns = document.querySelectorAll('.consultation-btn');
+            
+            consultationBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const service = btn.dataset.service;
+                    serviceInterest.value = service;
+                    consultationModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            closeConsultationModal.addEventListener('click', () => {
+                consultationModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            consultationModal.addEventListener('click', (e) => {
+                if (e.target === consultationModal) {
+                    consultationModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            consultationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    service: serviceInterest.value,
+                    name: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    company: document.getElementById('company').value,
+                    message: document.getElementById('message').value
+                };
+                
+                // Show success message
+                alert(`Thank you, ${formData.name}! We'll contact you within 24 hours to discuss ${formData.service}.`);
+                
+                // Reset form and close modal
+                consultationForm.reset();
+                consultationModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            // Nav consultation button
+            document.getElementById('navConsultationBtn').addEventListener('click', () => {
+                serviceInterest.value = 'General Inquiry';
+                consultationModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+
+        // Enhanced Scroll Animations
+        function setupScrollAnimations() {
+            const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+            const staggerElements = document.querySelectorAll('.reveal-stagger');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        
+                        // Handle stagger animations
+                        if (entry.target.classList.contains('reveal-stagger')) {
+                            const children = entry.target.children;
+                            Array.from(children).forEach((child, index) => {
+                                setTimeout(() => {
+                                    child.style.transitionDelay = `${index * 0.1}s`;
+                                    child.classList.add('active');
+                                }, 50);
+                            });
+                        }
+                    }
+                });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            reveals.forEach(element => {
+                observer.observe(element);
+            });
+            
+            staggerElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Navbar scroll effect
+        function setupNavbarScroll() {
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Initialize all functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            setupMobileNavigation();
+            setupServiceNavigation();
+            setupFAQ();
+            setupConsultationModal();
+            setupScrollAnimations();
+            setupNavbarScroll();
+
+            // Add CSS for pulse animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes pulse {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.05); }
+                    100% { transform: scale(1); }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            // Reset mobile menu if resizing to larger screen
+            if (window.innerWidth > 1023) {
+                const hamburger = document.getElementById('hamburger');
+                const navMenu = document.getElementById('navMenu');
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>

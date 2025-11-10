@@ -1,0 +1,2319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALSUTECH - Empowering Digital Transformation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0052CC;
+            --accent-orange: #FF6B35;
+            --accent-teal: #00D4AA;
+            --neutral-dark: #2D3A4B;
+            --neutral-gray: #6B7A90;
+            --background-light: #F8FAFC;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--neutral-dark);
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        /* Dynamic Background Elements */
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-orange);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .shape-3 {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-teal);
+            border-radius: 20% 80% 80% 20% / 20% 20% 80% 80%;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Mobile First Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 0.75rem 5%;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            z-index: 1001;
+        }
+
+        /* Mobile Menu */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--neutral-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a.commented {
+            color: var(--neutral-gray);
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        .nav-menu a.commented::after {
+            display: none;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-blue);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+            box-shadow: 0 4px 15px rgba(0, 82, 204, 0.3);
+            white-space: nowrap;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) translateZ(0);
+            box-shadow: 0 8px 25px rgba(0, 82, 204, 0.4);
+        }
+
+        /* Hero Section - Mobile First */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #0066FF 100%);
+            color: var(--white);
+            padding: 120px 5% 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,1000 1000,0 1000,1000"/></svg>');
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: particle-float 8s ease-in-out infinite;
+        }
+
+        @keyframes particle-float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(-40px) translateX(-10px); }
+            75% { transform: translateY(-20px) translateX(-5px); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            transform: translateZ(0);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            transform: translateZ(0);
+            line-height: 1.6;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            transform: translateZ(0);
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--accent-orange), #FF8C42);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+            flex: 1;
+            min-width: 160px;
+            max-width: 200px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) translateZ(0);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--white);
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+            flex: 1;
+            min-width: 160px;
+            max-width: 200px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary-blue);
+            transform: translateY(-3px) translateZ(0);
+        }
+
+        /* Consultation Button */
+        .consultation-btn {
+            background: linear-gradient(45deg, var(--accent-teal), #00B894);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+            box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .consultation-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .consultation-btn:hover::before {
+            left: 100%;
+        }
+
+        .consultation-btn:hover {
+            transform: translateY(-3px) translateZ(0);
+            box-shadow: 0 8px 25px rgba(0, 212, 170, 0.4);
+        }
+
+        /* Enhanced Trusted By Section */
+        .trusted-by {
+            background: var(--background-light);
+            padding: 3rem 5%;
+            text-align: center;
+            position: relative;
+        }
+
+        .trusted-by h3 {
+            color: var(--neutral-gray);
+            font-weight: 500;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .scrolling-logos {
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            padding: 1rem 0;
+        }
+
+        .scrolling-track {
+            display: flex;
+            gap: 2rem;
+            animation: scroll 40s linear infinite;
+        }
+
+        .scrolling-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-140px * 6)); }
+        }
+
+        .client-logo {
+            width: 120px;
+            height: 60px;
+            background: var(--white);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--neutral-gray);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            transform: translateZ(0);
+            position: relative;
+            overflow: hidden;
+            font-size: 0.9rem;
+        }
+
+        .client-logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .client-logo:hover::before {
+            left: 100%;
+        }
+
+        .client-logo:hover {
+            transform: translateY(-5px) translateZ(0);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            color: var(--primary-blue);
+        }
+
+        /* Advertising Sections */
+        .ad-section {
+            padding: 2rem 5%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            margin: 2rem 0;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ad-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .ad-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .ad-section p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .ad-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .ad-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+        }
+
+        .side-ad {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--accent-teal);
+            text-align: center;
+        }
+
+        .side-ad h4 {
+            color: var(--neutral-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .side-ad p {
+            color: var(--neutral-gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .ad-tag {
+            display: inline-block;
+            background: var(--background-light);
+            color: var(--neutral-gray);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 4rem 5%;
+            background: var(--white);
+            perspective: 1000px;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--neutral-dark);
+            margin-bottom: 1rem;
+            transform: translateZ(0);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            border-radius: 2px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2rem 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-orange), var(--accent-teal));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px) rotateX(5deg) translateZ(0);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            transform: translateZ(20px);
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .service-card h3 {
+            color: var(--neutral-dark);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            transform: translateZ(0);
+        }
+
+        .service-card p {
+            color: var(--neutral-gray);
+            margin-bottom: 1.5rem;
+            transform: translateZ(0);
+            line-height: 1.6;
+        }
+
+        .learn-more {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .learn-more::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-teal);
+            transition: width 0.3s ease;
+        }
+
+        .learn-more:hover {
+            gap: 1rem;
+            color: var(--accent-teal);
+        }
+
+        .learn-more:hover::before {
+            width: 100%;
+        }
+
+        /* Enhanced Testimonial Section */
+        .testimonials {
+            background: linear-gradient(135deg, var(--background-light) 0%, #e8eff5 100%);
+            padding: 4rem 5%;
+            position: relative;
+        }
+
+        .testimonial-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            background: var(--white);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .testimonial-slide {
+            min-width: 100%;
+            padding: 2.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .testimonial-content {
+            max-width: 600px;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--neutral-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-size: 2rem;
+            color: var(--accent-teal);
+            position: absolute;
+            opacity: 0.3;
+        }
+
+        .testimonial-text::before {
+            top: -15px;
+            left: -20px;
+        }
+
+        .testimonial-text::after {
+            bottom: -30px;
+            right: -20px;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--neutral-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonial-role {
+            color: var(--neutral-gray);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .testimonial-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--neutral-gray);
+            opacity: 0.3;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-dot.active {
+            opacity: 1;
+            background: var(--primary-blue);
+            transform: scale(1.2);
+        }
+
+        .add-testimonial {
+            margin-top: 2.5rem;
+            text-align: center;
+        }
+
+        /* Enhanced Share Experience Button */
+        .share-experience-btn {
+            background: linear-gradient(45deg, var(--accent-teal), #00B894);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+            box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .share-experience-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .share-experience-btn:hover::before {
+            left: 100%;
+        }
+
+        .share-experience-btn:hover {
+            transform: translateY(-3px) translateZ(0);
+            box-shadow: 0 8px 25px rgba(0, 212, 170, 0.4);
+        }
+
+        /* Fixed Testimonial Modal Styles */
+        .testimonial-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 1rem;
+        }
+
+        .testimonial-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .testimonial-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .testimonial-modal.active .testimonial-form {
+            transform: translateY(0);
+        }
+
+        .testimonial-form .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--neutral-gray);
+            transition: color 0.3s ease;
+            z-index: 1;
+        }
+
+        .testimonial-form .close-modal:hover {
+            color: var(--neutral-dark);
+        }
+
+        .testimonial-form .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-form .form-header h3 {
+            color: var(--neutral-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .testimonial-form .form-header p {
+            color: var(--neutral-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Consultation Modal */
+        .consultation-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 1rem;
+        }
+
+        .consultation-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .consultation-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .consultation-modal.active .consultation-form {
+            transform: translateY(0);
+        }
+
+        .consultation-form .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--neutral-gray);
+            transition: color 0.3s ease;
+            z-index: 1;
+        }
+
+        .consultation-form .close-modal:hover {
+            color: var(--neutral-dark);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-header h3 {
+            color: var(--neutral-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .form-header p {
+            color: var(--neutral-gray);
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--neutral-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            background: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .rating-stars {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .star {
+            cursor: pointer;
+            font-size: 1.5rem;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .star:hover,
+        .star.active {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        /* Success Message Styles */
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-teal);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 3000;
+            animation: slideInRight 0.5s ease;
+            max-width: calc(100% - 40px);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        /* Why Choose Us */
+        .why-choose {
+            padding: 4rem 5%;
+            background: var(--white);
+            position: relative;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-teal) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .feature:hover::before {
+            opacity: 0.05;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px) translateZ(0);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature h3 {
+            color: var(--neutral-dark);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .feature p {
+            color: var(--neutral-gray);
+            line-height: 1.6;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #0066FF 100%);
+            color: var(--white);
+            padding: 4rem 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: float 20s linear infinite;
+        }
+
+        .final-cta h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+            line-height: 1.3;
+        }
+
+        .final-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--neutral-dark);
+            color: var(--white);
+            padding: 3rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 1rem;
+            color: var(--white);
+            font-size: 1.2rem;
+        }
+
+        .footer-column a {
+            color: #CBD5E0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-teal);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #4A5568;
+            padding-top: 2rem;
+            text-align: center;
+            color: #CBD5E0;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: #4A5568;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .social-icon:hover {
+            background: var(--accent-teal);
+            transform: translateY(-2px);
+        }
+
+        /* 3D Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-30px) rotateY(10deg);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0) rotateY(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(30px) rotateY(-10deg);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0) rotateY(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Tablet Styles */
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonial-slide {
+                padding: 3rem 2rem;
+            }
+
+            .client-logo {
+                width: 140px;
+                height: 70px;
+            }
+
+            .shape-1 {
+                width: 80px;
+                height: 80px;
+            }
+
+            .shape-2 {
+                width: 100px;
+                height: 100px;
+            }
+
+            .shape-3 {
+                width: 70px;
+                height: 70px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .ad-section h3 {
+                font-size: 1.8rem;
+            }
+
+            .ad-section p {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 1024px) {
+            .hamburger {
+                display: none;
+            }
+
+            .nav-menu {
+                display: flex !important;
+                position: static;
+                flex-direction: row;
+                background: none;
+                box-shadow: none;
+                padding: 0;
+                width: auto;
+                height: auto;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .hero {
+                padding: 150px 5% 100px;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+
+            .testimonial-slide {
+                padding: 4rem;
+            }
+
+            .testimonial-text {
+                font-size: 1.25rem;
+            }
+
+            .client-logo {
+                width: 160px;
+                height: 80px;
+            }
+
+            .consultation-form,
+            .testimonial-form {
+                padding: 3rem;
+            }
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 1023px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                z-index: 1000;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu a {
+                font-size: 1.2rem;
+                padding: 0.5rem 0;
+            }
+
+            .cta-button {
+                margin-top: 1rem;
+            }
+        }
+
+        /* Small Mobile Devices */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .client-logo {
+                width: 110px;
+                height: 55px;
+                font-size: 0.8rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .service-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .testimonial-slide {
+                padding: 2rem 1rem;
+            }
+
+            .testimonial-text {
+                font-size: 1rem;
+            }
+
+            .final-cta h2 {
+                font-size: 1.8rem;
+            }
+
+            .final-cta p {
+                font-size: 1rem;
+            }
+
+            .consultation-form,
+            .testimonial-form {
+                padding: 1.5rem;
+            }
+
+            .ad-section {
+                padding: 1.5rem;
+            }
+
+            .ad-section h3 {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Large Desktop Screens */
+        @media (min-width: 1440px) {
+            .hero-content {
+                max-width: 1000px;
+            }
+
+            .services-grid,
+            .features-grid,
+            .footer-content {
+                max-width: 1400px;
+            }
+        }
+
+        /* High DPI Screens */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .hero::before {
+                background-size: cover;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .navbar,
+            .button-group,
+            .add-testimonial,
+            .social-links,
+            .ad-section,
+            .side-ad {
+                display: none;
+            }
+
+            .hero {
+                background: white !important;
+                color: black !important;
+                padding: 2rem 5%;
+            }
+
+            .service-card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dynamic Background Shapes -->
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">ALSUTECH</div>
+            
+            <!-- Hamburger Menu -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <!-- <li><a href="#" class="commented">Case Studies</a></li>
+                <li><a href="#" class="commented">Blog</a></li> -->
+                <li><a href="#">Contact</a></li>
+                <li><button class="cta-button" id="navConsultationBtn">GET QUOTE</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <h1 class="reveal">Empowering Your Digital Transformation</h1>
+            <p class="reveal">ALSUTECH delivers cutting-edge software and IT solutions to scale your business and outperform the competition.</p>
+            <div class="button-group">
+                <a href="services.html"><button class="btn-primary reveal-left">OUR SERVICES</button></a>
+                <button class="consultation-btn reveal-right" id="heroConsultationBtn">
+                    <i class="fas fa-calendar-check"></i> CONSULTATION SERVICE
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Trusted By Section -->
+    <section class="trusted-by">
+        <h3 class="reveal">TRUSTED BY INDUSTRY LEADERS</h3>
+        <div class="scrolling-logos">
+            <div class="scrolling-track">
+                <div class="client-logo">Oceanwindstfze</div>
+                <div class="client-logo">CRSG</div>
+                <div class="client-logo">Maltatradex</div>
+                <div class="client-logo">Velocitycarry</div>
+                <div class="client-logo">MWCYE</div>
+                <!-- <div class="client-logo">CLOUDSCAPE</div> -->
+                <!-- Duplicate for seamless loop -->
+                <div class="client-logo">Oceanwindstfze</div>
+                <div class="client-logo">CRSG</div>
+                <div class="client-logo">Maltatradex</div>
+                <div class="client-logo">Velocitycarry</div>
+                <div class="client-logo">MWCYE</div>
+                <!-- <div class="client-logo">CLOUDSCAPE</div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- First Ad Section -->
+    <section class="ad-section reveal">
+        <div class="ad-badge">Sponsored</div>
+        <div class="ad-content">
+            <h3>Boost Your Business with Our Premium Digital Marketing Solutions</h3>
+            <p>Get 10% off on annual Digital Marketing plans. Scale seamlessly with enterprise-grade marketing skills.</p>
+            <button class="consultation-btn">
+                <i class="fas fa-rocket"></i> Learn More
+            </button>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services">
+        <div class="section-header">
+            <h2 class="reveal">What We Do</h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-card reveal-left">
+                <div class="service-icon">💻</div>
+                <h3>Software Development</h3>
+                <p>Custom applications tailored to your business needs with cutting-edge technologies and agile methodologies.</p>
+                <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">☁️</div>
+                <h3>Cloud Solutions</h3>
+                <p>Scalable infrastructure for growing businesses with 99.9% uptime guarantee and seamless migration.</p>
+                <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Side Ad within Services -->
+            <div class="side-ad reveal-scale">
+                <div class="ad-tag">Special Offer</div>
+                <h4>Limited Time: Free Security Audit</h4>
+                <p>Get a comprehensive security assessment for your systems absolutely free.</p>
+                <button class="consultation-btn" style="padding: 0.75rem 1.5rem;">
+                    <i class="fas fa-shield-alt"></i> Claim Offer
+                </button>
+            </div>
+
+            <div class="service-card reveal">
+                <div class="service-icon">🔒</div>
+                <h3>Cybersecurity</h3>
+                <p>Protect your data and systems from emerging threats with our comprehensive security framework.</p>
+                <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <!-- <div class="service-card reveal-right">
+                <div class="service-icon">📊</div>
+                <h3>Data & AI</h3>
+                <p>Leverage data insights and AI capabilities to drive intelligent business decisions and automation.</p>
+                <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div> -->
+
+            <div class="service-card reveal-right">
+                <div class="service-icon">📊</div>
+                <h3>Data Analytics</h3>
+                <p>Leverage data insights and AI capabilities to drive intelligent business decisions and automation.</p>
+                <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Second Ad Section -->
+    <section class="ad-section reveal" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);">
+        <div class="ad-badge">Sponsored</div>
+        <div class="ad-content">
+            <h3>Join other individuals at our Educational Institution</h3>
+            <p>Transform your learning process with our cutting-edge AI and machine learning, Ui/Ux and other Faculties .</p>
+            <button class="consultation-btn" style="background: linear-gradient(45deg, #ffffff, #f1f2f6); color: #2d3436;">
+                <i class="fas fa-brain"></i> Explore Circo Digital technologies
+            </button>
+        </div>
+    </section>
+
+    <!-- Enhanced Testimonials Section -->
+    <section class="testimonials">
+        <div class="section-header">
+            <h2 class="reveal">What Our Clients Say</h2>
+        </div>
+        <div class="testimonial-container">
+            <div class="testimonial-slider">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <div class="testimonial-slide">
+                        <div class="testimonial-content">
+                            <p class="testimonial-text">"ALSUTECH helped us achieve 200% efficiency gains in our workflow processes and reduced operational costs by 30% within the first six months."</p>
+                            <p class="testimonial-author">Sarah Chen</p>
+                            <p class="testimonial-role">CEO of TechInnovate</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="testimonial-content">
+                            <p class="testimonial-text">"The cloud migration was seamless and our team adapted quickly. ALSUTECH's support team is incredibly responsive and knowledgeable."</p>
+                            <p class="testimonial-author">Michael Rodriguez</p>
+                            <p class="testimonial-role">CTO at Global Systems</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="testimonial-content">
+                            <p class="testimonial-text">"Their cybersecurity solution protected us from a major ransomware attack. The investment paid for itself ten times over."</p>
+                            <p class="testimonial-author">Jennifer Walsh</p>
+                            <p class="testimonial-role">Security Director, FinTrust</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-nav" id="testimonialNav">
+                <div class="testimonial-dot active" data-index="0"></div>
+                <div class="testimonial-dot" data-index="1"></div>
+                <div class="testimonial-dot" data-index="2"></div>
+            </div>
+        </div>
+        
+        <div class="add-testimonial">
+            <button class="share-experience-btn" id="shareExperienceBtn">
+                <i class="fas fa-plus-circle"></i> Share Your Experience
+            </button>
+        </div>
+    </section>
+
+    <!-- Consultation Modal -->
+    <div class="consultation-modal" id="consultationModal">
+        <div class="consultation-form">
+            <button class="close-modal" id="closeConsultationModal">&times;</button>
+            <div class="form-header">
+                <h3>Schedule Consultation</h3>
+                <p>Fill out the form below and our expert will contact you within 24 hours</p>
+            </div>
+            <form id="consultationForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" placeholder="Enter your first name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" placeholder="Enter your last name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="Enter your phone number">
+                </div>
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" id="company" placeholder="Enter your company name">
+                </div>
+                <div class="form-group">
+                    <label for="service">Service Interested In *</label>
+                    <select id="service" required>
+                        <option value="">Select a service</option>
+                        <option value="software">Software Development</option>
+                        <option value="cloud">Cloud Solutions</option>
+                        <option value="security">Cybersecurity</option>
+                        <option value="data">Data & AI</option>
+                        <option value="multiple">Multiple Services</option>
+                        <option value="not-sure">Not Sure</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="budget">Project Budget</label>
+                    <select id="budget">
+                        <option value="">Select budget range</option>
+                        <option value="5k-15k">50,000+</option>
+                        <!-- <option value="15k-50k">$15,000 - $50,000</option>
+                        <option value="50k-100k">$50,000 - $100,000</option>
+                        <option value="100k+">$100,000+</option> -->
+                        <option value="not-sure">Not Sure</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Project Details *</label>
+                    <textarea id="message" placeholder="Tell us about your project requirements, challenges, and goals..." required></textarea>
+                </div>
+                <button type="submit" class="consultation-btn" style="width: 100%; justify-content: center;">
+                    <i class="fas fa-paper-plane"></i> Schedule Consultation
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Fixed Testimonial Modal -->
+    <div class="testimonial-modal" id="testimonialModal">
+        <div class="testimonial-form">
+            <button class="close-modal" id="closeTestimonialModal">&times;</button>
+            <div class="form-header">
+                <h3>Share Your Experience</h3>
+                <p>We'd love to hear about your experience with ALSUTECH</p>
+            </div>
+            <form id="newTestimonialForm">
+                <div class="form-group">
+                    <label for="testimonialText">Your Testimonial *</label>
+                    <textarea id="testimonialText" placeholder="Tell us about your experience with ALSUTECH and how we helped your business..." required minlength="10" maxlength="500"></textarea>
+                    <small style="color: var(--neutral-gray); display: block; margin-top: 0.25rem;">Minimum 10 characters, maximum 500 characters</small>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="clientName">Your Name *</label>
+                        <input type="text" id="clientName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientCompany">Your Company</label>
+                        <input type="text" id="clientCompany" placeholder="Company name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="clientRole">Your Role *</label>
+                    <input type="text" id="clientRole" placeholder="e.g., CEO, CTO, Manager" required>
+                </div>
+                <div class="form-group">
+                    <label for="rating">Your Rating *</label>
+                    <div class="rating-stars">
+                        <span class="star" data-rating="1">⭐</span>
+                        <span class="star" data-rating="2">⭐</span>
+                        <span class="star" data-rating="3">⭐</span>
+                        <span class="star" data-rating="4">⭐</span>
+                        <span class="star" data-rating="5">⭐</span>
+                    </div>
+                    <input type="hidden" id="rating" value="0" required>
+                </div>
+                <button type="submit" class="share-experience-btn" style="width: 100%; justify-content: center;">
+                    <i class="fas fa-paper-plane"></i> Submit Testimonial
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Why Choose Us -->
+    <section class="why-choose">
+        <div class="section-header">
+            <h2 class="reveal">Why Choose ALSUTECH</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature reveal-left">
+                <div class="feature-icon">🎯</div>
+                <h3>Industry Expertise</h3>
+                <p>Deep knowledge across multiple sectors with proven success stories</p>
+            </div>
+            <div class="feature reveal-scale">
+                <div class="feature-icon">🔄</div>
+                <h3>Agile Methodology</h3>
+                <p>Flexible approach delivering results faster with continuous improvement</p>
+            </div>
+            <div class="feature reveal-right">
+                <div class="feature-icon">🕒</div>
+                <h3>24/7 Support</h3>
+                <p>Round-the-clock assistance when you need it with rapid response times</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <h2 class="reveal">Ready to Unlock Your Potential?</h2>
+        <p class="reveal">Let's discuss your project and find the perfect solution</p>
+        <button class="consultation-btn reveal-scale" id="finalConsultationBtn">
+            <i class="fas fa-calendar-check"></i> SCHEDULE CONSULTATION
+        </button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>ALSUTECH</h4>
+                <p>Simplifying complex technology to drive business growth and efficiency.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <a href="#">About Us</a>
+                <a href="#">Our Team</a>
+                <a href="#">Careers</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-column">
+                <h4>Services</h4>
+                <a href="#">Software Development</a>
+                <a href="#">Cloud Solutions</a>
+                <a href="#">Cybersecurity</a>
+                <a href="#">Data Analytics</a>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <a href="#">Documentation</a>
+                <a href="#">Support</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="social-links">
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+            </div>
+            <p>© 2025 ALSUTECH. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <p>📍 18 Summit Hills Estate, CICC, Calabr, CRS | 📞 (+234) 9075392231 | ✉️ alsutechsolutions@gmail.com
+        </div>
+    </footer>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = window.innerWidth < 768 ? 8 : 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random properties
+                const size = Math.random() * (window.innerWidth < 768 ? 4 : 6) + 2;
+                const left = Math.random() * 100;
+                const animationDelay = Math.random() * 8;
+                const animationDuration = Math.random() * 10 + 8;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${left}%`;
+                particle.style.animationDelay = `${animationDelay}s`;
+                particle.style.animationDuration = `${animationDuration}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Mobile Navigation Toggle
+        function setupMobileNavigation() {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+            
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+            });
+            
+            // Close menu when clicking on links
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        // Consultation Modal Functionality
+        function setupConsultationModal() {
+            const consultationModal = document.getElementById('consultationModal');
+            const closeConsultationModal = document.getElementById('closeConsultationModal');
+            const consultationForm = document.getElementById('consultationForm');
+            
+            // Open modal from various buttons
+            const consultationButtons = [
+                document.getElementById('heroConsultationBtn'),
+                document.getElementById('finalConsultationBtn'),
+                document.getElementById('navConsultationBtn')
+            ];
+            
+            consultationButtons.forEach(button => {
+                if (button) {
+                    button.addEventListener('click', () => {
+                        consultationModal.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    });
+                }
+            });
+            
+            // Close modal
+            closeConsultationModal.addEventListener('click', () => {
+                consultationModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal when clicking outside
+            consultationModal.addEventListener('click', (e) => {
+                if (e.target === consultationModal) {
+                    consultationModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Handle form submission
+            consultationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = {
+                    firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    company: document.getElementById('company').value,
+                    service: document.getElementById('service').value,
+                    budget: document.getElementById('budget').value,
+                    message: document.getElementById('message').value
+                };
+                
+                // Show success message
+                showMessage(`Thank you, ${formData.firstName}! We'll contact you within 24 hours.`, 'success');
+                
+                // Reset form and close modal
+                consultationForm.reset();
+                consultationModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                
+                // In a real application, you would send the formData to your server here
+                console.log('Consultation form submitted:', formData);
+            });
+        }
+
+        // Fixed Testimonial Form Functionality
+        function setupTestimonialForm() {
+            const shareExperienceBtn = document.getElementById('shareExperienceBtn');
+            const testimonialModal = document.getElementById('testimonialModal');
+            const closeTestimonialModal = document.getElementById('closeTestimonialModal');
+            const newTestimonialForm = document.getElementById('newTestimonialForm');
+            const stars = document.querySelectorAll('.star');
+            const ratingInput = document.getElementById('rating');
+
+            // Star rating functionality
+            stars.forEach(star => {
+                star.addEventListener('click', () => {
+                    const rating = parseInt(star.dataset.rating);
+                    ratingInput.value = rating;
+                    
+                    // Update star appearance
+                    stars.forEach((s, index) => {
+                        if (index < rating) {
+                            s.style.opacity = '1';
+                            s.style.transform = 'scale(1.2)';
+                            s.classList.add('active');
+                        } else {
+                            s.style.opacity = '0.5';
+                            s.style.transform = 'scale(1)';
+                            s.classList.remove('active');
+                        }
+                    });
+                });
+
+                star.addEventListener('mouseenter', () => {
+                    const rating = parseInt(star.dataset.rating);
+                    stars.forEach((s, index) => {
+                        if (index < rating) {
+                            s.style.opacity = '1';
+                            s.style.transform = 'scale(1.1)';
+                        }
+                    });
+                });
+
+                star.addEventListener('mouseleave', () => {
+                    const currentRating = parseInt(ratingInput.value);
+                    stars.forEach((s, index) => {
+                        if (index < currentRating) {
+                            s.style.opacity = '1';
+                            s.style.transform = 'scale(1.2)';
+                        } else {
+                            s.style.opacity = '0.5';
+                            s.style.transform = 'scale(1)';
+                        }
+                    });
+                });
+            });
+
+            // Open modal
+            shareExperienceBtn.addEventListener('click', () => {
+                testimonialModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            // Close modal
+            closeTestimonialModal.addEventListener('click', () => {
+                testimonialModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                resetTestimonialForm();
+            });
+
+            // Close modal when clicking outside
+            testimonialModal.addEventListener('click', (e) => {
+                if (e.target === testimonialModal) {
+                    testimonialModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                    resetTestimonialForm();
+                }
+            });
+
+            // Handle form submission
+            newTestimonialForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const testimonialText = document.getElementById('testimonialText').value;
+                const clientName = document.getElementById('clientName').value;
+                const clientCompany = document.getElementById('clientCompany').value;
+                const clientRole = document.getElementById('clientRole').value;
+                const rating = ratingInput.value;
+
+                // Validate form
+                if (!testimonialText || !clientName || !clientRole || rating === '0') {
+                    showMessage('Please fill in all required fields and provide a rating.', 'error');
+                    return;
+                }
+
+                if (testimonialText.length < 10) {
+                    showMessage('Testimonial must be at least 10 characters long.', 'error');
+                    return;
+                }
+
+                // Create testimonial object
+                const testimonial = {
+                    text: testimonialText,
+                    name: clientName,
+                    company: clientCompany,
+                    role: clientRole,
+                    rating: parseInt(rating),
+                    date: new Date().toISOString()
+                };
+
+                // In a real application, you would send this to your server
+                console.log('New testimonial submitted:', testimonial);
+
+                // Show success message
+                showMessage(`Thank you for your testimonial, ${clientName}! We'll review it and add it to our website soon.`, 'success');
+
+                // Reset form and close modal
+                resetTestimonialForm();
+                testimonialModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+
+                // Optionally, add the new testimonial to the slider
+                // addTestimonialToSlider(testimonial);
+            });
+
+            function resetTestimonialForm() {
+                newTestimonialForm.reset();
+                ratingInput.value = '0';
+                stars.forEach(star => {
+                    star.style.opacity = '0.5';
+                    star.style.transform = 'scale(1)';
+                    star.classList.remove('active');
+                });
+            }
+        }
+
+        // Success/Error Message Function
+        function showMessage(message, type = 'success') {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'success-message';
+            messageDiv.style.background = type === 'success' ? 'var(--accent-teal)' : 'var(--accent-orange)';
+            
+            const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+            messageDiv.innerHTML = `
+                <i class="fas ${icon}"></i> ${message}
+            `;
+            
+            document.body.appendChild(messageDiv);
+            
+            // Remove message after 5 seconds
+            setTimeout(() => {
+                messageDiv.style.animation = 'slideOutRight 0.5s ease';
+                setTimeout(() => {
+                    if (document.body.contains(messageDiv)) {
+                        document.body.removeChild(messageDiv);
+                    }
+                }, 500);
+            }, 5000);
+        }
+
+        // Testimonial Slider Functionality
+        let currentSlide = 0;
+        let autoSlideInterval;
+
+        function showSlide(index) {
+            const track = document.getElementById('testimonialTrack');
+            const dots = document.querySelectorAll('.testimonial-dot');
+            const slides = document.querySelectorAll('.testimonial-slide');
+            
+            if (index >= slides.length) {
+                index = 0;
+            }
+            if (index < 0) {
+                index = slides.length - 1;
+            }
+            
+            track.style.transform = `translateX(-${index * 100}%)`;
+            dots.forEach(dot => dot.classList.remove('active'));
+            if (dots[index]) {
+                dots[index].classList.add('active');
+            }
+            currentSlide = index;
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                const slides = document.querySelectorAll('.testimonial-slide');
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }, 5000);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+
+        // Scroll Reveal Animations
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            setupMobileNavigation();
+            setupConsultationModal();
+            setupTestimonialForm();
+            
+            // Initialize scroll reveal
+            const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { 
+                threshold: window.innerWidth < 768 ? 0.05 : 0.1,
+                rootMargin: window.innerWidth < 768 ? '0px 0px -50px 0px' : '0px 0px -100px 0px'
+            });
+            
+            reveals.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Navbar scroll effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Testimonial Slider Navigation
+            const dots = document.querySelectorAll('.testimonial-dot');
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const index = parseInt(dot.dataset.index);
+                    showSlide(index);
+                    stopAutoSlide();
+                    startAutoSlide();
+                });
+            });
+            
+            // Start auto-slide
+            startAutoSlide();
+            
+            // Pause auto-slide on hover
+            const slider = document.querySelector('.testimonial-slider');
+            slider.addEventListener('mouseenter', stopAutoSlide);
+            slider.addEventListener('mouseleave', startAutoSlide);
+            
+            // Enhanced button hover effects
+            const buttons = document.querySelectorAll('.btn-primary, .btn-secondary, .cta-button, .share-experience-btn, .consultation-btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = this.style.transform.replace('translateZ(0)', 'translateZ(10px)');
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = this.style.transform.replace('translateZ(10px)', 'translateZ(0)');
+                });
+            });
+
+            // Handle window resize
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    // Recreate particles on resize
+                    document.getElementById('particles').innerHTML = '';
+                    createParticles();
+                }, 250);
+            });
+        });
+    </script>
+</body>
+</html>
