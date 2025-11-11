@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact ALSUTECH - Get in Touch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0052CC;
+            --accent-orange: #FF6B35;
+            --accent-teal: #00D4AA;
+            --neutral-dark: #2D3A4B;
+            --neutral-gray: #6B7A90;
+            --background-light: #F8FAFC;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--neutral-dark);
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        /* Dynamic Background Elements */
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-orange);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .shape-3 {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-teal);
+            border-radius: 20% 80% 80% 20% / 20% 20% 80% 80%;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Mobile First Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 0.75rem 5%;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            z-index: 1001;
+        }
+
+        /* Mobile Menu */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--neutral-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a.active {
+            color: var(--primary-blue);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-blue);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+            box-shadow: 0 4px 15px rgba(0, 82, 204, 0.3);
+            white-space: nowrap;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) translateZ(0);
+            box-shadow: 0 8px 25px rgba(0, 82, 204, 0.4);
+        }
+
+        /* Hero Section - Contact Page */
+        .contact-hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #0066FF 100%);
+            color: var(--white);
+            padding: 120px 5% 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,1000 1000,0 1000,1000"/></svg>');
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .contact-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .contact-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            transform: translateZ(0);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            line-height: 1.2;
+        }
+
+        .contact-hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            transform: translateZ(0);
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 4rem 5%;
+            background: var(--white);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--neutral-dark);
+            margin-bottom: 1rem;
+            transform: translateZ(0);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            border-radius: 2px;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Contact Information */
+        .contact-info {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: var(--background-light);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-orange), var(--accent-teal));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px) translateZ(0);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+
+        .info-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .info-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .info-card h3 {
+            color: var(--neutral-dark);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .info-card p {
+            color: var(--neutral-gray);
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-card a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        .info-card a:hover {
+            color: var(--accent-teal);
+        }
+
+        /* Contact Form */
+        .contact-form-container {
+            background: var(--background-light);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            color: var(--neutral-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            background: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+            box-shadow: 0 4px 15px rgba(0, 82, 204, 0.3);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px) translateZ(0);
+            box-shadow: 0 8px 25px rgba(0, 82, 204, 0.4);
+        }
+
+        /* FAQ Section - Fixed */
+        .faq-section {
+            padding: 4rem 5%;
+            background: var(--background-light);
+            position: relative;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #f8fafc;
+        }
+
+        .faq-question h3 {
+            font-size: 1.1rem;
+            color: var(--neutral-dark);
+            margin: 0;
+            flex: 1;
+        }
+
+        .faq-icon {
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+            transition: transform 0.3s ease;
+            margin-left: 1rem;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: var(--white);
+        }
+
+        .faq-answer-content {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--neutral-gray);
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 0;
+            background: var(--white);
+            position: relative;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 400px;
+            position: relative;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--neutral-gray);
+        }
+
+        .map-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        .map-placeholder p {
+            font-size: 1.1rem;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #0066FF 100%);
+            color: var(--white);
+            padding: 4rem 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: float 20s linear infinite;
+        }
+
+        .final-cta h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+            line-height: 1.3;
+        }
+
+        .final-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--neutral-dark);
+            color: var(--white);
+            padding: 3rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 1rem;
+            color: var(--white);
+            font-size: 1.2rem;
+        }
+
+        .footer-column a {
+            color: #CBD5E0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-teal);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #4A5568;
+            padding-top: 2rem;
+            text-align: center;
+            color: #CBD5E0;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: #4A5568;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .social-icon:hover {
+            background: var(--accent-teal);
+            transform: translateY(-2px);
+        }
+
+        /* 3D Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-30px) rotateY(10deg);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0) rotateY(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(30px) rotateY(-10deg);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0) rotateY(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Success Message Styles */
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-teal);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 3000;
+            animation: slideInRight 0.5s ease;
+            max-width: calc(100% - 40px);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        /* Tablet Styles */
+        @media (min-width: 768px) {
+            .contact-hero h1 {
+                font-size: 3rem;
+            }
+
+            .contact-hero p {
+                font-size: 1.2rem;
+            }
+
+            .contact-info {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 1024px) {
+            .hamburger {
+                display: none;
+            }
+
+            .nav-menu {
+                display: flex !important;
+                position: static;
+                flex-direction: row;
+                background: none;
+                box-shadow: none;
+                padding: 0;
+                width: auto;
+                height: auto;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .contact-hero {
+                padding: 150px 5% 100px;
+            }
+
+            .contact-hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 1023px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                z-index: 1000;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu a {
+                font-size: 1.2rem;
+                padding: 0.5rem 0;
+            }
+
+            .cta-button {
+                margin-top: 1rem;
+            }
+        }
+
+        /* Small Mobile Devices */
+        @media (max-width: 480px) {
+            .contact-hero h1 {
+                font-size: 2rem;
+            }
+
+            .contact-hero p {
+                font-size: 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .info-card,
+            .contact-form-container {
+                padding: 1.5rem;
+            }
+
+            .faq-question {
+                padding: 1.25rem;
+            }
+
+            .faq-question h3 {
+                font-size: 1rem;
+            }
+        }
+
+        /* Large Desktop Screens */
+        @media (min-width: 1440px) {
+            .contact-hero-content {
+                max-width: 1000px;
+            }
+
+            .contact-container,
+            .faq-container,
+            .footer-content {
+                max-width: 1400px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .navbar,
+            .cta-button,
+            .social-links,
+            .final-cta,
+            .map-section {
+                display: none;
+            }
+
+            .contact-hero {
+                background: white !important;
+                color: black !important;
+                padding: 2rem 5%;
+            }
+
+            .info-card,
+            .contact-form-container,
+            .faq-item {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dynamic Background Shapes -->
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">ALSUTECH</div>
+            
+            <!-- Hamburger Menu -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><button class="cta-button" id="navConsultationBtn">GET QUOTE</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contact Hero Section -->
+    <section class="contact-hero">
+        <div class="contact-hero-content">
+            <h1 class="reveal">Get In Touch</h1>
+            <p class="reveal">Have a project in mind or need technical assistance? We're here to help transform your ideas into reality.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="section-header">
+            <h2 class="reveal">Contact Us</h2>
+        </div>
+        <div class="contact-container">
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <div class="info-card reveal-left">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Our Location</h3>
+                    <p>18 Summit Hills Estate</p>
+                    <p>CICC, Calabar, Cross River State</p>
+                    <p>Nigeria</p>
+                </div>
+                
+                <div class="info-card reveal">
+                    <div class="info-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Phone Number</h3>
+                    <p><a href="tel:+2349075392231">+234 907 539 2231</a></p>
+                    <p><a href="tel:+2348162345678">+234 816 234 5678</a></p>
+                </div>
+                
+                <div class="info-card reveal">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Address</h3>
+                    <p><a href="mailto:alsutechsolutions@gmail.com">alsutechsolutions@gmail.com</a></p>
+                    <p><a href="mailto:support@alsutech.com">support@alsutech.com</a></p>
+                </div>
+                
+                <div class="info-card reveal-right">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Working Hours</h3>
+                    <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                    <p>Saturday: 10:00 AM - 4:00 PM</p>
+                    <p>Sunday: Closed</p>
+                </div>
+            </div>
+            
+            <!-- Contact Form -->
+            <div class="contact-form-container reveal-scale">
+                <h3 style="margin-bottom: 1.5rem; color: var(--neutral-dark);">Send us a message</h3>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company Name</label>
+                            <input type="text" id="company" placeholder="Enter your company name">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" placeholder="Enter your email address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" placeholder="Enter your phone number">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="service">Service Interested In</label>
+                        <select id="service">
+                            <option value="">Select a service</option>
+                            <option value="software">Software Development</option>
+                            <option value="cloud">Cloud Solutions</option>
+                            <option value="security">Cybersecurity</option>
+                            <option value="data">Data Analytics</option>
+                            <option value="multiple">Multiple Services</option>
+                            <option value="not-sure">Not Sure</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Your Message *</label>
+                        <textarea id="message" placeholder="Tell us about your project, requirements, or questions..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section - Fixed -->
+    <section class="faq-section">
+        <div class="section-header">
+            <h2 class="reveal">Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item reveal-left">
+                <div class="faq-question">
+                    <h3>How quickly can you start working on my project?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>We typically begin new projects within 1-2 weeks of contract signing. The exact timeline depends on project complexity and our current workload. During our initial consultation, we'll provide a detailed project timeline.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    <h3>Do you offer ongoing support after project completion?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Yes, we offer various support packages tailored to your needs. This can include maintenance, updates, technical support, and performance monitoring. We'll discuss support options during the project planning phase.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    <h3>What industries do you specialize in?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>We have experience across multiple industries including finance, healthcare, education, e-commerce, logistics, and manufacturing. Our adaptable approach allows us to understand and address industry-specific challenges effectively.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item reveal-right">
+                <div class="faq-question">
+                    <h3>How do you ensure the security of our data?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>We implement industry-standard security protocols including encryption, secure access controls, regular security audits, and compliance with data protection regulations. All team members are trained in security best practices, and we're happy to sign NDAs to protect your sensitive information.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    <h3>What is your typical project process?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Our process follows these key stages: Discovery & Planning, Design & Prototyping, Development, Testing & Quality Assurance, Deployment, and Ongoing Support. We maintain transparent communication throughout and provide regular progress updates.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="map-container">
+            <div class="map-placeholder">
+                <i class="fas fa-map-marked-alt"></i>
+                <p>Interactive Map Location</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem;">18 Summit Hills Estate, CICC, Calabar, Nigeria</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <h2 class="reveal">Ready to Start Your Project?</h2>
+        <p class="reveal">Let's discuss your requirements and create a solution tailored to your business needs</p>
+        <button class="cta-button reveal-scale" id="finalCtaBtn">
+            <i class="fas fa-calendar-check"></i> SCHEDULE CONSULTATION
+        </button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>ALSUTECH</h4>
+                <p>Simplifying complex technology to drive business growth and efficiency.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-column">
+                <h4>Services</h4>
+                <a href="services.html">Software Development</a>
+                <a href="services.html">Cloud Solutions</a>
+                <a href="services.html">Cybersecurity</a>
+                <a href="services.html">Data Analytics</a>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <a href="#">Documentation</a>
+                <a href="#">Support</a>
+                <a href="#">Blog</a>
+                <a href="#">Case Studies</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="social-links">
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+            </div>
+            <p>© 2025 ALSUTECH. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <p>📍 18 Summit Hills Estate, CICC, Calabar, CRS | 📞 (+234) 9075392231 | ✉️ alsutechsolutions@gmail.com
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        function setupMobileNavigation() {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+            
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+            });
+            
+            // Close menu when clicking on links
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        // Contact Form Functionality
+        function setupContactForm() {
+            const contactForm = document.getElementById('contactForm');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = {
+                    name: document.getElementById('name').value,
+                    company: document.getElementById('company').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    service: document.getElementById('service').value,
+                    message: document.getElementById('message').value
+                };
+                
+                // Show success message
+                showMessage(`Thank you, ${formData.name}! Your message has been sent successfully. We'll get back to you within 24 hours.`, 'success');
+                
+                // Reset form
+                contactForm.reset();
+                
+                // In a real application, you would send the formData to your server here
+                console.log('Contact form submitted:', formData);
+            });
+        }
+
+        // Fixed FAQ Accordion Functionality
+        function setupFAQAccordion() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Toggle the active class on the clicked item
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all FAQ items
+                    faqItems.forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                    });
+                    
+                    // If the clicked item wasn't active, open it
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // Consultation Button Functionality
+        function setupConsultationButtons() {
+            const consultationButtons = [
+                document.getElementById('navConsultationBtn'),
+                document.getElementById('finalCtaBtn')
+            ];
+            
+            consultationButtons.forEach(button => {
+                if (button) {
+                    button.addEventListener('click', () => {
+                        // Redirect to contact form section
+                        document.getElementById('contactForm').scrollIntoView({ 
+                            behavior: 'smooth' 
+                        });
+                        
+                        // Add a slight highlight effect to the form
+                        const formContainer = document.querySelector('.contact-form-container');
+                        formContainer.style.boxShadow = '0 0 0 3px rgba(0, 212, 170, 0.3)';
+                        setTimeout(() => {
+                            formContainer.style.boxShadow = '';
+                        }, 2000);
+                    });
+                }
+            });
+        }
+
+        // Success/Error Message Function
+        function showMessage(message, type = 'success') {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'success-message';
+            messageDiv.style.background = type === 'success' ? 'var(--accent-teal)' : 'var(--accent-orange)';
+            
+            const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+            messageDiv.innerHTML = `
+                <i class="fas ${icon}"></i> ${message}
+            `;
+            
+            document.body.appendChild(messageDiv);
+            
+            // Remove message after 5 seconds
+            setTimeout(() => {
+                messageDiv.style.animation = 'slideOutRight 0.5s ease';
+                setTimeout(() => {
+                    if (document.body.contains(messageDiv)) {
+                        document.body.removeChild(messageDiv);
+                    }
+                }, 500);
+            }, 5000);
+        }
+
+        // Scroll Reveal Animations
+        document.addEventListener('DOMContentLoaded', function() {
+            setupMobileNavigation();
+            setupContactForm();
+            setupFAQAccordion();
+            setupConsultationButtons();
+            
+            // Initialize scroll reveal
+            const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { 
+                threshold: window.innerWidth < 768 ? 0.05 : 0.1,
+                rootMargin: window.innerWidth < 768 ? '0px 0px -50px 0px' : '0px 0px -100px 0px'
+            });
+            
+            reveals.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Navbar scroll effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Enhanced button hover effects
+            const buttons = document.querySelectorAll('.cta-button, .submit-btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) translateZ(10px)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) translateZ(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
