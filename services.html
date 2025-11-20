@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         :root {
             --primary-blue: #0052CC;
@@ -1041,7 +1042,7 @@
             transform: translateY(-5px) scale(1.1);
         }
 
-        /* Consultation Modal */
+        /* Consultation Modal - FIXED */
         .consultation-modal {
             position: fixed;
             top: 0;
@@ -1057,6 +1058,7 @@
             visibility: hidden;
             transition: all 0.3s ease;
             padding: 1rem;
+            overflow-y: auto; /* Enable scrolling for the modal background */
         }
 
         .consultation-modal.active {
@@ -1074,6 +1076,8 @@
             position: relative;
             transform: translateY(30px) scale(0.9);
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 90vh; /* Limit height to viewport */
+            overflow-y: auto; /* Enable scrolling for form content */
         }
 
         .consultation-modal.active .consultation-form {
@@ -1090,6 +1094,7 @@
             cursor: pointer;
             color: var(--neutral-gray);
             transition: all 0.3s ease;
+            z-index: 10; /* Ensure it's above the form content */
         }
 
         .close-modal:hover {
@@ -1129,6 +1134,56 @@
             outline: none;
             border-color: var(--accent-teal);
             box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
+        }
+
+        /* Form Loading State */
+        .form-loading {
+            position: relative;
+            pointer-events: none;
+        }
+
+        .form-loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-loading .cta-button {
+            background: var(--neutral-gray);
+            cursor: not-allowed;
+        }
+
+        .form-loading .cta-button::after {
+            content: 'Sending...';
+        }
+
+        /* Success/Error Messages */
+        .form-message {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .form-message.success {
+            background: rgba(0, 212, 170, 0.1);
+            color: var(--accent-teal);
+            border: 1px solid var(--accent-teal);
+        }
+
+        .form-message.error {
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--accent-orange);
+            border: 1px solid var(--accent-orange);
         }
 
         /* Enhanced Scroll Animations */
@@ -1368,6 +1423,7 @@
 
             .consultation-form {
                 padding: 2rem;
+                max-height: 85vh; /* Slightly smaller on mobile */
             }
 
             .footer-content {
@@ -1418,6 +1474,11 @@
 
             .final-cta h2 {
                 font-size: 1.8rem;
+            }
+
+            .consultation-form {
+                padding: 1.5rem;
+                max-height: 80vh; /* Even smaller on very small screens */
             }
         }
 
@@ -1701,54 +1762,6 @@
         </div>
     </section>
 
-    <!-- Enhanced Case Studies Preview -->
-    <!-- <section class="case-studies-preview">
-        <div class="section-header">
-            <h2 class="reveal">Success Stories</h2>
-            <p class="reveal">See how we've helped businesses achieve their goals</p>
-        </div>
-        <div class="case-studies-grid reveal-stagger">
-            <div class="case-study-card">
-                <div class="case-study-image">
-                    <i class="fas fa-shopping-cart"></i>
-                </div>
-                <div class="case-study-content">
-                    <h3>E-commerce Platform</h3>
-                    <p>Built a scalable e-commerce platform processing 10,000+ daily transactions</p>
-                    <div class="case-study-stats">
-                        <div class="stat">
-                            <span class="stat-value">300%</span>
-                            <span class="stat-label">Revenue Growth</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">2s</span>
-                            <span class="stat-label">Load Time</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="case-study-card">
-                <div class="case-study-image">
-                    <i class="fas fa-heartbeat"></i>
-                </div>
-                <div class="case-study-content">
-                    <h3>Healthcare Analytics</h3>
-                    <p>AI-powered analytics platform for patient care optimization</p>
-                    <div class="case-study-stats">
-                        <div class="stat">
-                            <span class="stat-value">40%</span>
-                            <span class="stat-label">Efficiency Gain</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">99.9%</span>
-                            <span class="stat-label">Uptime</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-
     <!-- Enhanced FAQ Section -->
     <section class="faq-section">
         <div class="section-header">
@@ -1788,7 +1801,7 @@
 
     <!-- Enhanced Final CTA -->
     <section class="final-cta">
-        <h2 class="reveal">Ready to Start Your Project?</h2>
+        <h2 class="reveal">Ready to Boost Your Business?</h2>
         <p class="reveal">Let's discuss how our services can help your business grow</p>
         <button class="consultation-btn reveal-scale" data-service="General Consultation">
             <i class="fas fa-calendar-check"></i> Schedule Consultation
@@ -1804,10 +1817,10 @@
             </div>
             <div class="footer-column">
                 <h4>Company</h4>
-                <a href="#">About Us</a>
-                <a href="#">Our Team</a>
-                <a href="#">Careers</a>
-                <a href="#">Contact</a>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="contact.html">Contact</a>
             </div>
             <div class="footer-column">
                 <h4>Services</h4>
@@ -1840,6 +1853,7 @@
             <button class="close-modal" id="closeConsultationModal">&times;</button>
             <h3>Schedule Consultation</h3>
             <form id="consultationForm">
+                <div class="form-message" id="formMessage" style="display: none;"></div>
                 <div class="form-group">
                     <label for="serviceInterest">Service Interested In</label>
                     <input type="text" id="serviceInterest" readonly>
@@ -1857,10 +1871,14 @@
                     <input type="text" id="company" placeholder="Enter your company name">
                 </div>
                 <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="Enter your phone number">
+                </div>
+                <div class="form-group">
                     <label for="message">Project Details *</label>
                     <textarea id="message" placeholder="Tell us about your project requirements..." required></textarea>
                 </div>
-                <button type="submit" class="cta-button" style="width: 100%;">
+                <button type="submit" class="cta-button" id="submitBtn" style="width: 100%;">
                     Schedule Consultation
                 </button>
             </form>
@@ -1868,6 +1886,16 @@
     </div>
 
     <script>
+        // EmailJS Configuration
+        (function() {
+            // Initialize EmailJS with your public key
+            emailjs.init("uMjM0e7qDRQmVxF_C"); // Replace with your actual EmailJS public key
+            
+            // Set up service and template IDs
+            const EMAILJS_SERVICE_ID = "service_5s0ut6n"; // Replace with your EmailJS service ID
+            const EMAILJS_TEMPLATE_ID = "template_zj7gfye"; // Replace with your EmailJS template ID
+        })();
+
         // Mobile Navigation Toggle
         function setupMobileNavigation() {
             const hamburger = document.getElementById('hamburger');
@@ -1955,13 +1983,15 @@
             });
         }
 
-        // Consultation Modal with Enhanced Animations
+        // Consultation Modal with Enhanced Animations and EmailJS Integration
         function setupConsultationModal() {
             const consultationModal = document.getElementById('consultationModal');
             const closeConsultationModal = document.getElementById('closeConsultationModal');
             const consultationForm = document.getElementById('consultationForm');
             const serviceInterest = document.getElementById('serviceInterest');
             const consultationBtns = document.querySelectorAll('.consultation-btn');
+            const formMessage = document.getElementById('formMessage');
+            const submitBtn = document.getElementById('submitBtn');
             
             consultationBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -1969,6 +1999,8 @@
                     serviceInterest.value = service;
                     consultationModal.classList.add('active');
                     document.body.style.overflow = 'hidden';
+                    // Reset form message
+                    formMessage.style.display = 'none';
                 });
             });
             
@@ -1984,24 +2016,51 @@
                 }
             });
             
-            consultationForm.addEventListener('submit', function(e) {
+            consultationForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
+                
+                // Show loading state
+                submitBtn.disabled = true;
+                consultationForm.classList.add('form-loading');
                 
                 const formData = {
                     service: serviceInterest.value,
                     name: document.getElementById('fullName').value,
                     email: document.getElementById('email').value,
                     company: document.getElementById('company').value,
-                    message: document.getElementById('message').value
+                    phone: document.getElementById('phone').value,
+                    message: document.getElementById('message').value,
+                    submissionDate: new Date().toLocaleString()
                 };
                 
-                // Show success message
-                alert(`Thank you, ${formData.name}! We'll contact you within 24 hours to discuss ${formData.service}.`);
-                
-                // Reset form and close modal
-                consultationForm.reset();
-                consultationModal.classList.remove('active');
-                document.body.style.overflow = 'auto';
+                try {
+                    // Send email using EmailJS
+                    const response = await emailjs.send(
+                        "service_5s0ut6n", // Replace with your EmailJS service ID
+                        "template_zj7gfye", // Replace with your EmailJS template ID
+                        formData
+                    );
+                    
+                    // Show success message
+                    showFormMessage('Thank you! Your consultation request has been sent successfully. We will contact you within 24 hours.', 'success');
+                    
+                    // Reset form
+                    consultationForm.reset();
+                    
+                    // Close modal after 3 seconds
+                    setTimeout(() => {
+                        consultationModal.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }, 3000);
+                    
+                } catch (error) {
+                    console.error('EmailJS Error:', error);
+                    showFormMessage('Sorry, there was an error sending your message. Please try again or contact us directly.', 'error');
+                } finally {
+                    // Reset loading state
+                    submitBtn.disabled = false;
+                    consultationForm.classList.remove('form-loading');
+                }
             });
 
             // Nav consultation button
@@ -2009,7 +2068,19 @@
                 serviceInterest.value = 'General Inquiry';
                 consultationModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
+                // Reset form message
+                formMessage.style.display = 'none';
             });
+
+            // Helper function to show form messages
+            function showFormMessage(message, type) {
+                formMessage.textContent = message;
+                formMessage.className = `form-message ${type}`;
+                formMessage.style.display = 'block';
+                
+                // Scroll to message
+                formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         }
 
         // Enhanced Scroll Animations

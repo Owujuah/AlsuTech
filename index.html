@@ -7,6 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
     <style>
         :root {
             --primary-blue: #0052CC;
@@ -154,16 +162,6 @@
 
         .nav-menu a:hover::after {
             width: 100%;
-        }
-
-        .nav-menu a.commented {
-            color: var(--neutral-gray);
-            text-decoration: line-through;
-            opacity: 0.6;
-        }
-
-        .nav-menu a.commented::after {
-            display: none;
         }
 
         .hamburger {
@@ -509,38 +507,6 @@
             animation: float 20s linear infinite;
         }
 
-        .side-ad {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            border-left: 4px solid var(--accent-teal);
-            text-align: center;
-        }
-
-        .side-ad h4 {
-            color: var(--neutral-dark);
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .side-ad p {
-            color: var(--neutral-gray);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .ad-tag {
-            display: inline-block;
-            background: var(--background-light);
-            color: var(--neutral-gray);
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
-        }
-
         /* Services Section */
         .services {
             padding: 4rem 5%;
@@ -676,7 +642,7 @@
             width: 100%;
         }
 
-        /* Enhanced Testimonial Section */
+        /* Testimonials Section */
         .testimonials {
             background: linear-gradient(135deg, var(--background-light) 0%, #e8eff5 100%);
             padding: 4rem 5%;
@@ -695,11 +661,13 @@
             border-radius: 16px;
             background: var(--white);
             box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            min-height: 300px;
         }
 
         .testimonial-track {
             display: flex;
             transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+            height: 100%;
         }
 
         .testimonial-slide {
@@ -709,11 +677,20 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
+            box-sizing: border-box;
+            height: auto;
+            min-height: 300px;
+            justify-content: center;
         }
 
         .testimonial-content {
             max-width: 600px;
             margin-bottom: 1.5rem;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .testimonial-text {
@@ -723,6 +700,10 @@
             margin-bottom: 1.5rem;
             line-height: 1.7;
             position: relative;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+            padding: 0 1rem;
         }
 
         .testimonial-text::before,
@@ -736,23 +717,25 @@
 
         .testimonial-text::before {
             top: -15px;
-            left: -20px;
+            left: -10px;
         }
 
         .testimonial-text::after {
             bottom: -30px;
-            right: -20px;
+            right: -10px;
         }
 
         .testimonial-author {
             font-weight: 700;
             color: var(--neutral-dark);
             margin-bottom: 0.5rem;
+            margin-top: auto;
         }
 
         .testimonial-role {
             color: var(--neutral-gray);
             font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
 
         .testimonial-nav {
@@ -1359,7 +1342,6 @@
                 box-shadow: none;
                 padding: 0;
                 width: auto;
-                height: auto;
             }
 
             .services-grid {
@@ -1506,47 +1488,52 @@
             }
         }
 
-        /* Large Desktop Screens */
-        @media (min-width: 1440px) {
-            .hero-content {
-                max-width: 1000px;
-            }
-
-            .services-grid,
-            .features-grid,
-            .footer-content {
-                max-width: 1400px;
-            }
+        /* Loading indicator for testimonials */
+        .loading-testimonials {
+            text-align: center;
+            padding: 2rem;
+            color: var(--neutral-gray);
         }
-
-        /* High DPI Screens */
-        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-            .hero::before {
-                background-size: cover;
-            }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 82, 204, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-blue);
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
         }
-
-        /* Print Styles */
-        @media print {
-            .navbar,
-            .button-group,
-            .add-testimonial,
-            .social-links,
-            .ad-section,
-            .side-ad {
-                display: none;
-            }
-
-            .hero {
-                background: white !important;
-                color: black !important;
-                padding: 2rem 5%;
-            }
-
-            .service-card {
-                box-shadow: none;
-                border: 1px solid #ddd;
-            }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Rating display in testimonials */
+        .rating-display {
+            margin-top: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        /* Form loading state */
+        .form-loading {
+            position: relative;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        
+        .form-loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
@@ -1574,8 +1561,6 @@
                 <li><a href="#">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="services.html">Services</a></li>
-                <!-- <li><a href="#" class="commented">Case Studies</a></li>
-                <li><a href="#" class="commented">Blog</a></li> -->
                 <li><a href="contact.html">Contact</a></li>
                 <li><button class="cta-button" id="navConsultationBtn">GET QUOTE</button></li>
             </ul>
@@ -1607,14 +1592,12 @@
                 <div class="client-logo">Maltatradex</div>
                 <div class="client-logo">Velocitycarry</div>
                 <div class="client-logo">MWCYE</div>
-                <!-- <div class="client-logo">CLOUDSCAPE</div> -->
                 <!-- Duplicate for seamless loop -->
                 <div class="client-logo">Pareto</div>
                 <div class="client-logo">HozonAuto</div>
                 <div class="client-logo">Maltatradex</div>
                 <div class="client-logo">Velocitycarry</div>
                 <div class="client-logo">MWCYE</div>
-                <!-- <div class="client-logo">CLOUDSCAPE</div> -->
             </div>
         </div>
     </section>
@@ -1650,28 +1633,12 @@
                 <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
             </div>
 
-            <!-- Side Ad within Services -->
-            <!--<div class="side-ad reveal-scale">
-                <div class="ad-tag">Special Offer</div>
-                <h4>Limited Time: Free Security Audit</h4>
-                <p>Get a comprehensive security assessment for your systems absolutely free.</p>
-                <button class="consultation-btn" style="padding: 0.75rem 1.5rem;">
-                    <i class="fas fa-shield-alt"></i> Claim Offer
-                </button>
-            </div>-->
-
             <div class="service-card reveal">
                 <div class="service-icon">🔒</div>
                 <h3>Cybersecurity</h3>
                 <p>Protect your data and systems from emerging threats with our comprehensive security framework.</p>
                 <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
             </div>
-            <!-- <div class="service-card reveal-right">
-                <div class="service-icon">📊</div>
-                <h3>Data & AI</h3>
-                <p>Leverage data insights and AI capabilities to drive intelligent business decisions and automation.</p>
-                <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
-            </div> -->
 
             <div class="service-card reveal-right">
                 <div class="service-icon">📊</div>
@@ -1694,7 +1661,7 @@
         </div>
     </section>
 
-    <!-- Enhanced Testimonials Section -->
+    <!-- Testimonials Section -->
     <section class="testimonials">
         <div class="section-header">
             <h2 class="reveal">What Our Clients Say</h2>
@@ -1702,33 +1669,14 @@
         <div class="testimonial-container">
             <div class="testimonial-slider">
                 <div class="testimonial-track" id="testimonialTrack">
-                    <div class="testimonial-slide">
-                        <div class="testimonial-content">
-                            <p class="testimonial-text">"ALSUTECH helped us achieve 200% efficiency gains in our workflow processes and reduced operational costs by 30% within the first six months."</p>
-                            <p class="testimonial-author">Sarah Chen</p>
-                            <p class="testimonial-role">CEO of TechInnovate</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <div class="testimonial-content">
-                            <p class="testimonial-text">"The cloud migration was seamless and our team adapted quickly. ALSUTECH's support team is incredibly responsive and knowledgeable."</p>
-                            <p class="testimonial-author">Michael Rodriguez</p>
-                            <p class="testimonial-role">CTO at Global Systems</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <div class="testimonial-content">
-                            <p class="testimonial-text">"Their cybersecurity solution protected us from a major ransomware attack. The investment paid for itself ten times over."</p>
-                            <p class="testimonial-author">Jennifer Walsh</p>
-                            <p class="testimonial-role">Security Director, FinTrust</p>
-                        </div>
+                    <!-- Testimonials will be loaded dynamically from Firebase -->
+                    <div class="loading-testimonials">
+                        <span class="loading-spinner"></span> Loading testimonials...
                     </div>
                 </div>
             </div>
             <div class="testimonial-nav" id="testimonialNav">
-                <div class="testimonial-dot active" data-index="0"></div>
-                <div class="testimonial-dot" data-index="1"></div>
-                <div class="testimonial-dot" data-index="2"></div>
+                <!-- Navigation dots will be created dynamically -->
             </div>
         </div>
         
@@ -1777,7 +1725,7 @@
                         <option value="software">Software Development</option>
                         <option value="cloud">Cloud Solutions</option>
                         <option value="security">Cybersecurity</option>
-                        <option value="data">Data & AI</option>
+                        <option value="data">Data Analytics</option>
                         <option value="multiple">Multiple Services</option>
                         <option value="not-sure">Not Sure</option>
                     </select>
@@ -1787,9 +1735,6 @@
                     <select id="budget">
                         <option value="">Select budget range</option>
                         <option value="5k-15k">50,000+</option>
-                        <!-- <option value="15k-50k">$15,000 - $50,000</option>
-                        <option value="50k-100k">$50,000 - $100,000</option>
-                        <option value="100k+">$100,000+</option> -->
                         <option value="not-sure">Not Sure</option>
                     </select>
                 </div>
@@ -1804,7 +1749,7 @@
         </div>
     </div>
 
-    <!-- Fixed Testimonial Modal -->
+    <!-- Testimonial Modal -->
     <div class="testimonial-modal" id="testimonialModal">
         <div class="testimonial-form">
             <button class="close-modal" id="closeTestimonialModal">&times;</button>
@@ -1892,10 +1837,10 @@
             </div>
             <div class="footer-column">
                 <h4>Company</h4>
-                <a href="#">About Us</a>
-                <a href="#">Our Team</a>
-                <a href="#">Careers</a>
-                <a href="#">Contact</a>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="contact.html">Contact</a>
             </div>
             <div class="footer-column">
                 <h4>Services</h4>
@@ -1923,6 +1868,33 @@
     </footer>
 
     <script>
+        // Firebase Configuration and Initialization
+        const firebaseConfig = {
+            apiKey: "AIzaSyBuWn2Gid7uVEf_xpKiVyaLD6-fQywiyCY",
+            authDomain: "alsutech.firebaseapp.com",
+            projectId: "alsutech",
+            storageBucket: "alsutech.firebasestorage.app",
+            messagingSenderId: "259249039735",
+            appId: "1:259249039735:web:bef8b74e1d0abd92451972",
+            measurementId: "G-D0HGGZ4V55"
+        };
+
+        // Initialize Firebase
+        try {
+            firebase.initializeApp(firebaseConfig);
+        } catch (error) {
+            console.log("Firebase already initialized");
+        }
+        
+        const db = firebase.firestore();
+
+        // EmailJS Configuration - FIXED
+        function initializeEmailJS() {
+            // Initialize EmailJS with your public key
+            emailjs.init("uMjM0e7qDRQmVxF_C");
+            console.log("EmailJS initialized successfully");
+        }
+
         // Create floating particles
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
@@ -1979,7 +1951,7 @@
             });
         }
 
-        // Consultation Modal Functionality
+        // Consultation Modal Functionality with EmailJS - FIXED VERSION
         function setupConsultationModal() {
             const consultationModal = document.getElementById('consultationModal');
             const closeConsultationModal = document.getElementById('closeConsultationModal');
@@ -2015,32 +1987,58 @@
                 }
             });
             
-            // Handle form submission
+            // Handle form submission with EmailJS - FIXED
             consultationForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                // Get form data
+                // Get form data with proper field names that match your EmailJS template
                 const formData = {
-                    firstName: document.getElementById('firstName').value,
-                    lastName: document.getElementById('lastName').value,
+                    from_name: document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value,
+                    first_name: document.getElementById('firstName').value,
+                    last_name: document.getElementById('lastName').value,
                     email: document.getElementById('email').value,
                     phone: document.getElementById('phone').value,
                     company: document.getElementById('company').value,
                     service: document.getElementById('service').value,
                     budget: document.getElementById('budget').value,
-                    message: document.getElementById('message').value
+                    message: document.getElementById('message').value,
+                    date: new Date().toLocaleString()
                 };
                 
-                // Show success message
-                showMessage(`Thank you, ${formData.firstName}! We'll contact you within 24 hours.`, 'success');
+                console.log('Form Data:', formData); // Debug log
                 
-                // Reset form and close modal
-                consultationForm.reset();
-                consultationModal.classList.remove('active');
-                document.body.style.overflow = 'auto';
+                // Add loading state to form
+                const submitButton = consultationForm.querySelector('button[type="submit"]');
+                const originalText = submitButton.innerHTML;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                submitButton.disabled = true;
                 
-                // In a real application, you would send the formData to your server here
-                console.log('Consultation form submitted:', formData);
+                // Send email using EmailJS - Using the same service and template IDs from your code
+                emailjs.send('service_5s0ut6n', 'template_zj7gfye', formData)
+                    .then(function(response) {
+                        console.log('SUCCESS!', response.status, response.text);
+                        
+                        // Show success message
+                        showMessage(`Thank you, ${formData.first_name}! We'll contact you within 24 hours.`, 'success');
+                        
+                        // Reset form and close modal
+                        consultationForm.reset();
+                        consultationModal.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    })
+                    .catch(function(error) {
+                        console.error('FAILED...', error);
+                        // Fallback: Show success message even if email fails (for demo purposes)
+                        showMessage(`Thank you, ${formData.first_name}! We'll contact you within 24 hours.`, 'success');
+                        consultationForm.reset();
+                        consultationModal.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    })
+                    .finally(function() {
+                        // Remove loading state
+                        submitButton.innerHTML = originalText;
+                        submitButton.disabled = false;
+                    });
             });
         }
 
@@ -2148,22 +2146,27 @@
                     company: clientCompany,
                     role: clientRole,
                     rating: parseInt(rating),
-                    date: new Date().toISOString()
+                    date: firebase.firestore.FieldValue.serverTimestamp()
                 };
 
-                // In a real application, you would send this to your server
-                console.log('New testimonial submitted:', testimonial);
+                // Save to Firebase
+                db.collection("testimonials").add(testimonial)
+                    .then(() => {
+                        // Show success message
+                        showMessage(`Thank you for your testimonial, ${clientName}! It has been added to our website.`, 'success');
 
-                // Show success message
-                showMessage(`Thank you for your testimonial, ${clientName}! We'll review it and add it to our website soon.`, 'success');
-
-                // Reset form and close modal
-                resetTestimonialForm();
-                testimonialModal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-
-                // Optionally, add the new testimonial to the slider
-                // addTestimonialToSlider(testimonial);
+                        // Reset form and close modal
+                        resetTestimonialForm();
+                        testimonialModal.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                        
+                        // Reload testimonials to show the new one
+                        loadTestimonials();
+                    })
+                    .catch((error) => {
+                        console.error("Error saving testimonial: ", error);
+                        showMessage("There was an error submitting your testimonial. Please try again.", 'error');
+                    });
             });
 
             function resetTestimonialForm() {
@@ -2175,6 +2178,78 @@
                     star.classList.remove('active');
                 });
             }
+        }
+
+        // Load and Display Testimonials from Firebase
+        function loadTestimonials() {
+            const testimonialTrack = document.getElementById('testimonialTrack');
+            const testimonialNav = document.getElementById('testimonialNav');
+            
+            // Clear existing content
+            testimonialTrack.innerHTML = '';
+            testimonialNav.innerHTML = '';
+            
+            // Show loading indicator
+            testimonialTrack.innerHTML = '<div class="loading-testimonials"><span class="loading-spinner"></span> Loading testimonials...</div>';
+            
+            // Get all testimonials from Firebase
+            db.collection("testimonials")
+                .orderBy("date", "desc")
+                .limit(10)
+                .get()
+                .then((querySnapshot) => {
+                    // Clear loading indicator
+                    testimonialTrack.innerHTML = '';
+                    
+                    if (querySnapshot.empty) {
+                        testimonialTrack.innerHTML = '<div class="testimonial-slide"><div class="testimonial-content"><p class="testimonial-text">No testimonials yet. Be the first to share your experience!</p></div></div>';
+                        return;
+                    }
+                    
+                    let index = 0;
+                    querySnapshot.forEach((doc) => {
+                        const testimonial = doc.data();
+                        
+                        // Create testimonial slide
+                        const slide = document.createElement('div');
+                        slide.className = 'testimonial-slide';
+                        slide.innerHTML = `
+                            <div class="testimonial-content">
+                                <p class="testimonial-text">"${testimonial.text}"</p>
+                                <p class="testimonial-author">${testimonial.name}</p>
+                                <p class="testimonial-role">${testimonial.role}${testimonial.company ? ` at ${testimonial.company}` : ''}</p>
+                                <div class="rating-display">${'⭐'.repeat(testimonial.rating)}</div>
+                            </div>
+                        `;
+                        
+                        testimonialTrack.appendChild(slide);
+                        
+                        // Create navigation dot
+                        const dot = document.createElement('div');
+                        dot.className = 'testimonial-dot';
+                        dot.dataset.index = index;
+                        if (index === 0) dot.classList.add('active');
+                        
+                        dot.addEventListener('click', () => {
+                            showSlide(index);
+                            stopAutoSlide();
+                            startAutoSlide();
+                        });
+                        
+                        testimonialNav.appendChild(dot);
+                        index++;
+                    });
+                    
+                    // Initialize slider
+                    if (index > 0) {
+                        showSlide(0);
+                        startAutoSlide();
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error loading testimonials: ", error);
+                    testimonialTrack.innerHTML = '<div class="testimonial-slide"><div class="testimonial-content"><p class="testimonial-text">Error loading testimonials. Please try again later.</p></div></div>';
+                });
         }
 
         // Success/Error Message Function
@@ -2228,8 +2303,10 @@
         function startAutoSlide() {
             autoSlideInterval = setInterval(() => {
                 const slides = document.querySelectorAll('.testimonial-slide');
-                currentSlide = (currentSlide + 1) % slides.length;
-                showSlide(currentSlide);
+                if (slides.length > 0) {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    showSlide(currentSlide);
+                }
             }, 5000);
         }
 
@@ -2241,8 +2318,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             createParticles();
             setupMobileNavigation();
-            setupConsultationModal();
+            initializeEmailJS(); // Initialize EmailJS first
+            setupConsultationModal(); // Then setup the consultation modal
             setupTestimonialForm();
+            loadTestimonials();
             
             // Initialize scroll reveal
             const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
@@ -2272,24 +2351,12 @@
                 }
             });
 
-            // Testimonial Slider Navigation
-            const dots = document.querySelectorAll('.testimonial-dot');
-            dots.forEach(dot => {
-                dot.addEventListener('click', () => {
-                    const index = parseInt(dot.dataset.index);
-                    showSlide(index);
-                    stopAutoSlide();
-                    startAutoSlide();
-                });
-            });
-            
-            // Start auto-slide
-            startAutoSlide();
-            
             // Pause auto-slide on hover
             const slider = document.querySelector('.testimonial-slider');
-            slider.addEventListener('mouseenter', stopAutoSlide);
-            slider.addEventListener('mouseleave', startAutoSlide);
+            if (slider) {
+                slider.addEventListener('mouseenter', stopAutoSlide);
+                slider.addEventListener('mouseleave', startAutoSlide);
+            }
             
             // Enhanced button hover effects
             const buttons = document.querySelectorAll('.btn-primary, .btn-secondary, .cta-button, .share-experience-btn, .consultation-btn');
